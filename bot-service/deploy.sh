@@ -5,4 +5,5 @@ gcloud run deploy bot-service \
   --platform managed \
   --region us-east1 \
   --allow-unauthenticated \
-  --max-instances=1
+  --max-instances=1 \
+  --quiet

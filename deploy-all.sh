@@ -1,19 +1,17 @@
 #gcloud auth list #mostrar cuenta activa
 #gcloud config list project #mostrar id proyecto
 gcloud pubsub topics create bot-report #crear un topic pub/sub
-gcloud services enable run.googleapis.com
-git clone https://github.com/marc459/TelegramBotGCP-UI
+gcloud services enable run.googleapis.com #habilitar cloudrun
+git clone https://github.com/marc459/TelegramBotGCP-UI #descargar nuestro proyecto
 
+# BOT SERVICE
+cd TelegramBotGCP-UI/bot-service 
 
-cd bot-service
-
-npm install express
-npm install body-parser
-npm install @google-cloud/pubsub
+npm install -y express body-parser @google-cloud/pubsub #instalar dependencias
 
 chmod u+x deploy.sh
 ./deploy.sh
-export LAB_REPORT_SERVICE_URL=$(gcloud run services describe lab-report-service --platform managed --region us-east1 --format="value(status.address.url)")
+export LAB_REPORT_SERVICE_URL=$(gcloud run  services describe lab-report-service --platform managed --region us-east1 --format="value(status.address.url)" --quiet)
 
 chmod u+x post-reports.sh
 ./post-post-reports.sh
