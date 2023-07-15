@@ -1,8 +1,10 @@
-FROM node:10
+FROM debian:buster
+
+RUN apt update
 RUN apt install -y nginx
 WORKDIR /var/www/html
 COPY package.json package*.json ./
 #RUN npm install --only=production
 COPY . .
 #CMD [ "npm", "start" ]
-CMD service nginx start && bash
+CMD nginx -g 'daemon off;'
