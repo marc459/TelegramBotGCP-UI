@@ -7,7 +7,7 @@ git clone https://github.com/marc459/TelegramBotGCP-UI #descargar nuestro proyec
 # BOT SERVICE
 cd TelegramBotGCP-UI/bot-service 
 
-npm install -y express body-parser @google-cloud/pubsub #instalar dependencias
+npm install -y express body-parser @google-cloud/pubsub node-telegram-bot-api #instalar dependencias
 
 chmod u+x deploy.sh
 gcloud services enable cloudbuild.googleapis.com --project=$(gcloud projects list --filter="${GOOGLE_CLOUD_PROJECT}" --format='value(PROJECT_NUMBER)') #habilitar cloud build

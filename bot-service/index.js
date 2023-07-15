@@ -4,10 +4,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log('Listening on port', port);
-});
+const TelegramBot = require('node-telegram-bot-api');
+
+
+const token = '6301757870:AAG_QI3O97sNaW3q8jsX4YLBq_7dMrbdb4o';
+const bot = new TelegramBot(token, { polling: true });
+
+
 app.post('/', async (req, res) => {
   try {
     const labReport = req.body;
@@ -19,7 +22,33 @@ app.post('/', async (req, res) => {
     res.status(500).send(ex);
   }
 })
+
+app.get('/', async (req, res) => {
+  res.send("Bot enabled")
+})
+
+// Ruta para recibir los mensajes de Telegram
+const enableBot = ()=>
+{
+  bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+    const message = msg.text;
+    
+    console.log(`Mensaje recibido: ${message}`);
+    publishPubSubMessage(message);
+    bot.sendMessage(chatId, '¡Hola! He recibido tu mensaje.');
+    return(message);
+  });
+}
+
 async function publishPubSubMessage(labReport) {
   const buffer = Buffer.from(JSON.stringify(labReport));
   await pubsub.topic('bot-report').publish(buffer);
 }
+
+enableBot();
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log('Listening on port', port);
+});
