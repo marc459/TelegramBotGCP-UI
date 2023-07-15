@@ -1,8 +1,9 @@
 gcloud builds submit \
-  --tag gcr.io/$GOOGLE_CLOUD_PROJECT/ui-service
+  --tag gcr.io/$GOOGLE_CLOUD_PROJECT/ui-service --quiet
 gcloud run deploy ui-service \
   --image gcr.io/$GOOGLE_CLOUD_PROJECT/ui-service \
   --platform managed \
   --region us-east1 \
   --no-allow-unauthenticated \
-  --max-instances=1
+  --max-instances=1 \
+  --quiet
