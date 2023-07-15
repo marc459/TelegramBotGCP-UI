@@ -5,7 +5,9 @@ gcloud services enable run.googleapis.com #habilitar cloudrun
 git clone https://github.com/marc459/TelegramBotGCP-UI #descargar nuestro proyecto
 
 # BOT SERVICE
-cd TelegramBotGCP-UI/bot-service 
+cd TelegramBotGCP-UI/bot-service
+chmod u+x deploy.sh
+chmod u+x ../bot-service/deploy.sh
 
 npm install -y express body-parser @google-cloud/pubsub node-telegram-bot-api #instalar dependencias
 
