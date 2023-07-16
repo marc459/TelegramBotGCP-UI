@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div>
-      <h1>WebSocket Chat</h1>
+      <h1>Movistar Client Chat</h1>
       <ul>
         {messages.map((message, index) => (
           <li key={index}>{message}</li>
