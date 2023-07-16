@@ -21,19 +21,28 @@
 # #CMD nginx -g 'daemon off;'
 
 
-FROM node:10
-COPY react-app/* /app/
-WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
-COPY /react-app/package.json .
-COPY /react-app/package-lock.json .
+# FROM node:10
+# COPY test-app /app
+# WORKDIR /app/test-app/build
+# ENV PATH /app/node_modules/.bin:$PATH
+# COPY /react-app/package.json .
+# COPY /react-app/package-lock.json .
 
-# COPY . .
-RUN npm i
+# # COPY . .
+# RUN npm i
+# RUN npm install -g serve
+# EXPOSE 8080
+
+
 #RUN npm install react-scripts@3.4.1
-RUN npm run build
+#SHELL ["/bin/bash", "--login", "-c"]
+#RUN npm run build
+#CMD ["serve", "-s", "-l", "8080", "./build"]
 
 FROM nginx:stable-alpine
 #COPY --from=build /app/build /usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html/*
+COPY test-app/build/* /usr/share/nginx/html/
+#RUN cp -r /app/test-app/build/* /var/www/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
