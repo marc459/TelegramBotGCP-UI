@@ -25,15 +25,15 @@ FROM node:10
 COPY react-app/* /app/
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-COPY ./react-app/package.json ./
-COPY ./react-app/package-lock.json ./
+COPY /react-app/package.json .
+COPY /react-app/package-lock.json .
 
 # COPY . .
-RUN npm ci --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm i
+#RUN npm install react-scripts@3.4.1
 RUN npm run build
 
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+#COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
