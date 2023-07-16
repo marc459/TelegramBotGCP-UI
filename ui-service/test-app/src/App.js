@@ -1,32 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function App() {
   const [messages, setMessages] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const socketRef = useRef(null);
 
   useEffect(() => {
-    // Establece la conexión WebSocket
-    const socket = new WebSocket('ws://bot-service-36gz5wrlea-ue.a.run.app:8080/ws');
+    // Connect to the WebSocket server
+    socketRef.current = new WebSocket('ws://bot-service-36gz5wrlea-ue.a.run.app');
 
-    // Maneja los mensajes recibidos desde el servidor
-    socket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      setMessages(prevMessages => [...prevMessages, message]);
+    // Handle incoming messages
+    socketRef.current.onmessage = (event) => {
+      const message = event.data;
+      setMessages((prevMessages) => [...prevMessages, message]);
     };
 
-    // Cierra la conexión WebSocket al desmontar el componente
+    // Clean up the WebSocket connection on unmount
     return () => {
-      socket.close();
+      socketRef.current.close();
     };
   }, []);
 
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (inputValue.trim()) {
+      // Send the message to the server
+      socketRef.current.send(inputValue);
+      setInputValue('');
+    }
+  };
+
   return (
     <div>
-      <h1>Mensajes recibidos:</h1>
+      <h1>WebSocket Chat</h1>
       <ul>
         {messages.map((message, index) => (
           <li key={index}>{message}</li>
         ))}
       </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={inputValue} onChange={handleInputChange} />
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 }
