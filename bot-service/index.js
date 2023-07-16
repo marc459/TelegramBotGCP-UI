@@ -38,21 +38,6 @@ app.get('/', async (req, res) => {
   res.send("Bot enabled")
 })
 
-// Configura la ruta de WebSocket para establecer la conexión
-app.ws('/ws', (ws, req) => {
-    // Agrega la conexión WebSocket al array de clientes
-    clients.push(ws);
-
-    // Maneja el cierre de la conexión WebSocket
-    ws.on('close', () => {
-        // Elimina la conexión WebSocket del array de clientes
-        const index = clients.indexOf(ws);
-        if (index !== -1) {
-        clients.splice(index, 1);
-        }
-    });
-});
-
 // Ruta para recibir los mensajes de Telegram
 const enableBot = ()=>
 {
