@@ -42,6 +42,8 @@
 FROM nginx:stable-alpine
 #COPY --from=build /app/build /usr/share/nginx/html
 RUN rm -rf /usr/share/nginx/html/*
+COPY test-app .
+# RUN cd test-app && npm run build && mv build/* /usr/share/nginx/html/
 COPY test-app/build/* /usr/share/nginx/html/
 #RUN cp -r /app/test-app/build/* /var/www/html
 EXPOSE 80
