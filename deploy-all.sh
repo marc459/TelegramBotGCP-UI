@@ -2,7 +2,7 @@
 #gcloud config list project #mostrar id proyecto
 gcloud pubsub topics create bot-report #crear un topic pub/sub
 gcloud services enable run.googleapis.com #habilitar cloudrun
-git clone https://github.com/marc459/TelegramBotGCP-UI #descargar nuestro proyecto
+#git clone https://github.com/marc459/TelegramBotGCP-UI #descargar nuestro proyecto
 
 # BOT SERVICE
 cd TelegramBotGCP-UI/bot-service && chmod u+x deploy.sh && chmod u+x ../bot-service/deploy.sh
