@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    // Establece la conexión WebSocket
+    const socket = new WebSocket('ws://bot-service-36gz5wrlea-ue.a.run.app:8080/ws');
+
+    // Maneja los mensajes recibidos desde el servidor
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      setMessages(prevMessages => [...prevMessages, message]);
+    };
+
+    // Cierra la conexión WebSocket al desmontar el componente
+    return () => {
+      socket.close();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Mensajes recibidos:</h1>
+      <ul>
+        {messages.map((message, index) => (
+          <li key={index}>{message}</li>
+        ))}
+      </ul>
     </div>
   );
 }
