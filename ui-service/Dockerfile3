@@ -1,0 +1,13 @@
+# Use the official Nginx base image
+FROM nginx:latest
+
+# Copy custom Nginx configuration file
+
+# Copy static files to Nginx document root
+COPY index.html pubsubmanage.js /usr/share/nginx/html/
+
+# Expose port 8080 (the default port for Nginx)
+EXPOSE 8080
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
