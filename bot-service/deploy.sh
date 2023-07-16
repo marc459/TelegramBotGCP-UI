@@ -47,5 +47,4 @@ gcloud run deploy $SERVICE_NAME \
   --project $GCP_PROJECT \
   --platform managed \
   --region $REGION \
-  --port=3000 \
   --allow-unauthenticated
