@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div className="chat-container">
-      <h1 className="chat-header">WebSocket Chat</h1>
+      <h1 className="chat-header">Agent Chat</h1>
       <div className="chat-messages">
         {messages.map((message, index) => (
           <div key={index} className="chat-message">{message.text}</div>
