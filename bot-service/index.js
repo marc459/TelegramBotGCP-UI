@@ -5,10 +5,10 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const TelegramBot = require('node-telegram-bot-api');
-const WebSocket = require('ws');
-const cors = require('cors');
+// const WebSocket = require('ws');
+// const cors = require('cors');
 
-app.use(cors());
+// app.use(cors());
 
 
 const token = '6301757870:AAG_QI3O97sNaW3q8jsX4YLBq_7dMrbdb4o';
@@ -49,7 +49,7 @@ const enableBot = ()=>
     const message = msg.text;
     
     console.log(`Mensaje recibido: ${message}`);
-    publishPubSubMessage(message);
+    // publishPubSubMessage(message);
     bot.sendMessage(chatId, '¡Hola! He recibido tu mensaje.');
     return(message);
   });
@@ -62,33 +62,35 @@ async function publishPubSubMessage(labReport) {
 
 enableBot();
 
+
+// const wss = new WebSocket.Server({ server });
+// // Store connected clients
+// const clients = new Set();
+
+// // WebSocket connection handler
+// wss.on('connection', (ws) => {
+//   // Add new client to the set
+//   clients.add(ws);
+
+//   // Handle incoming messages
+//   ws.on('message', (message) => {
+//     // Broadcast the received message to all connected clients
+//     wss.clients.forEach((client) => {
+//       if (client.readyState === WebSocket.OPEN) {
+//         client.send(message);
+//       }
+//     });
+//   });
+
+//   // Handle client disconnection
+//   ws.on('close', () => {
+//     // Remove the client from the set
+//     clients.delete(ws);
+//   });
+// });
+
+
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
   console.log('Listening on port', port);
-});
-
-const wss = new WebSocket.Server({ server });
-// Store connected clients
-const clients = new Set();
-
-// WebSocket connection handler
-wss.on('connection', (ws) => {
-  // Add new client to the set
-  clients.add(ws);
-
-  // Handle incoming messages
-  ws.on('message', (message) => {
-    // Broadcast the received message to all connected clients
-    wss.clients.forEach((client) => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
-      }
-    });
-  });
-
-  // Handle client disconnection
-  ws.on('close', () => {
-    // Remove the client from the set
-    clients.delete(ws);
-  });
 });

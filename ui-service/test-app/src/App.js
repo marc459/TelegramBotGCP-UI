@@ -4,28 +4,28 @@ import './App.css';
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
-  const socket = new WebSocket('ws://bot-service-36gz5wrlea-ue.a.run.app');
+//   const socket = new WebSocket('ws://bot-service-36gz5wrlea-ue.a.run.app');
 
-  useEffect(() => {
-    socket.onopen = () => {
-      console.log('WebSocket connected');
-    };
+//   useEffect(() => {
+//     socket.onopen = () => {
+//       console.log('WebSocket connected');
+//     };
 
-    socket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      setMessages((prevMessages) => [...prevMessages, message]);
-    };
+//     socket.onmessage = (event) => {
+//       const message = JSON.parse(event.data);
+//       setMessages((prevMessages) => [...prevMessages, message]);
+//     };
 
-    return () => {
-      socket.close();
-      console.log('WebSocket disconnected');
-    };
-  }, []);
+//     return () => {
+//       socket.close();
+//       console.log('WebSocket disconnected');
+//     };
+//   }, []);
 
   const handleSendMessage = () => {
     if (inputMessage.trim() !== '') {
       const message = { text: inputMessage };
-      socket.send(JSON.stringify(message));
+    //   socket.send(JSON.stringify(message));
       setInputMessage('');
     }
   };
