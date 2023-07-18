@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const TelegramBot = require('node-telegram-bot-api');
 const WebSocket = require('ws');
+const cors = require('cors');
+
+app.use(cors());
 
 
 const token = '6301757870:AAG_QI3O97sNaW3q8jsX4YLBq_7dMrbdb4o';
