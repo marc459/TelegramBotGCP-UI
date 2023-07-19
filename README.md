@@ -70,10 +70,24 @@ Se trata de establecer una conexion a  traves de web sockets con el backend.
 
 ### BIBLIOGRAFíA
 
-https://www.cloudskillsboost.google/focuses/8389?parent=catalog
+Compile un sistema resiliente y asíncrono con Cloud Run y Pub/Sub
+> https://www.cloudskillsboost.google/focuses/8389?parent=catalog
 
-https://cloud.google.com/run/docs/tutorials/pubsub?hl=es-419#command-line
+Instructivo de uso de Pub/Sub con Cloud Run
+> https://cloud.google.com/run/docs/tutorials/pubsub?hl=es-419#command-line
 
-https://medium.com/@iacomini.riccardo/build-a-serverless-telegram-bot-on-gcp-with-cloud-run-8d4ec9080b0f
 
-https://github.com/meteatamel/knative-tutorial/blob/master/docs/deploycloudrun.md
+Build a serverless Telegram bot on GCP with Cloud Run
+> https://medium.com/@iacomini.riccardo/build-a-serverless-telegram-bot-on-gcp-with-cloud-run-8d4ec9080b0f
+
+Deploy to Cloud Run
+> https://github.com/meteatamel/knative-tutorial/blob/master/docs/deploycloudrun.md
+
+
+Instructivo sobre compilación de un servicio de chat basado en WebSocket para Cloud Run
+
+> https://cloud.google.com/run/docs/tutorials/websockets?hl=es-419
+
+Este workshop/guía que otorga google cloud como ejemplo es muy similar a la práctica pedida.Tan solo habría que establecer un Cloud Run que gestione las peticiones del servidor de Telegram(mensajes de los clientes) y genere una api de gestion de chats y tenga persistencia de datos en una BBDD de datos en caché redis.
+
+![image](https://github.com/marc459/TelegramBotGCP-UI/blob/master/README/gcpsimilarworkshop.png)
