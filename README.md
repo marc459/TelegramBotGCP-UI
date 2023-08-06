@@ -24,7 +24,7 @@ En la terminal de google cloud dentro de un proyecto ya creado, ejecute el scrip
 
 ### DIAGRAMA
 
-![image](https://github.com/marc459/TelegramBotGCP-UI/blob/master/README/diagram.png)
+![image](https://github.com/marc459/TelegramBotGCP-UI/blob/master/README/diagram.jpeg)
 
 ## SWAGGERS
 
